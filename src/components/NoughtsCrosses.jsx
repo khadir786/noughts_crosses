@@ -33,7 +33,12 @@ function checkWinner(tiles, setStrikeType, count, onOpenModal, setModal) {
       tileValue1 === tileValue3
     ) {
       setStrikeType(strikeClass);
-      setModal(prevModal => ({...prevModal, type: 'winner', title: `Player ${tileValue1} has won!!!!!`, message: 'cool'}));
+      setModal((prevModal) => ({
+        ...prevModal,
+        type: "winner",
+        title: `Player ${tileValue1} has won!!!!!`,
+        message: "cool",
+      }));
       console.log(`Player ${tileValue1} has won!!!!!`);
       onOpenModal();
       return;
@@ -42,13 +47,17 @@ function checkWinner(tiles, setStrikeType, count, onOpenModal, setModal) {
 
   // check for draw
   if (count >= 9) {
-    setModal(prevModal => ({...prevModal, type: 'draw', title: "The game has ended in a draw...", message: 'cool'}));
+    setModal((prevModal) => ({
+      ...prevModal,
+      type: "draw",
+      title: "The game has ended in a draw...",
+      message: "cool",
+    }));
     console.log("The game has ended in a draw...");
     onOpenModal();
     return;
   }
 }
-
 
 function NoughtsCrosses() {
   const [tiles, setTiles] = useState(Array(9).fill(null));
@@ -56,7 +65,11 @@ function NoughtsCrosses() {
   const [strikeType, setStrikeType] = useState();
   const [count, setCount] = useState(0);
   const [open, setOpen] = useState(false); // for modal
-  const [modalInfo, setModalInfo] = useState({type: "", title:"", message:  ""});
+  const [modalInfo, setModalInfo] = useState({
+    type: "",
+    title: "",
+    message: "",
+  });
 
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
@@ -94,6 +107,7 @@ function NoughtsCrosses() {
           currentPlayer={currentPlayer}
           strikeType={strikeType}
         />
+        <div className="resetButton ">{count > 0 && <button>Reset Game</button>}</div>
         <GameOver
           onOpenModal={onOpenModal}
           onCloseModal={onCloseModal}
