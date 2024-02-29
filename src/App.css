@@ -1,0 +1,51 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+
+.title {
+
+}
+
+.title > h1 {
+  transition: transform 0.3s;
+}
+
+.title > h1:hover {
+  transform: scale(1.1);
+}
+
+.GameContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  height: calc(100vh - 40rem); 
+}
+
+.BoardContainer {
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+    cursor: pointer;
+    position: relative;
+}
+
+.tile {
+  color: currentColor;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.right-border {
+  border-right: 0.2em solid white;
+}
+
+.bottom-border {
+  border-bottom: 0.2em solid white;
+}
+
