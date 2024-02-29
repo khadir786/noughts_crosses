@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Board from './Board';
 
 const PLAYER_X = "X";
-const PLAYER_Y = "Y";
+const PLAYER_O = "O";
 
 function NoughtsCrosses() {
     const [tiles, setTiles] = useState(Array(9).fill(null))
@@ -13,7 +13,7 @@ function NoughtsCrosses() {
         const newTiles = [...tiles];
         newTiles[index] = currentPlayer;
         setTiles(newTiles);
-        const newPlayer = currentPlayer  === PLAYER_X ? PLAYER_Y : PLAYER_X;
+        const newPlayer = currentPlayer  === PLAYER_X ? PLAYER_O : PLAYER_X;
         setCurrentPlayer(newPlayer);
         
         console.log(index);
