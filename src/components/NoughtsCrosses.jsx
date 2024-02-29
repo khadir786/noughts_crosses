@@ -19,7 +19,7 @@ const winningCombinations = [
 ];
 
   
-function checkWinner(tiles) {
+function checkWinner(tiles, setStrikeType, count) {
   for (const {combo, strikeClass} of winningCombinations) {
     const tileValue1 = tiles[combo[0]];
     const tileValue2 = tiles[combo[1]];
@@ -34,7 +34,12 @@ function checkWinner(tiles) {
       tileValue1 === tileValue3
     ) {
       console.log(`Player ${tileValue1} has won!!!!!`);
-      return;
+      setStrikeType(strikeClass);
+      return; 
+    }
+    if (count >= 9) {
+        console.log('The game has ended in a draw...')
+        return;
     }
   }
 }
@@ -47,7 +52,7 @@ function NoughtsCrosses() {
 
   console.log("tiles clicked: " + count);
 
-  useEffect(()=>{checkWinner(tiles)}, [tiles]);
+  useEffect(()=>{checkWinner(tiles, setStrikeType, count)}, [count, tiles]);
 
   function handleTileClick(index) {
     if (tiles[index] != null) return; // tile already filled in
@@ -71,6 +76,7 @@ function NoughtsCrosses() {
           tiles={tiles}
           onTileClick={handleTileClick}
           currentPlayer={currentPlayer}
+          strikeType={strikeType}
         />
       </div>
     </div>
