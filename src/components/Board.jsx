@@ -1,7 +1,7 @@
 import Strike from "./Strike";
 import Tile from "./Tile";
 
-export default function Board({ tiles, onTileClick, currentPlayer }) {
+export default function Board({ tiles, onTileClick, currentPlayer, strikeType }) {
   return (
     <div className="BoardContainer">
       <Tile
@@ -57,7 +57,7 @@ export default function Board({ tiles, onTileClick, currentPlayer }) {
         value={tiles[8]}
         currentPlayer={currentPlayer}
       />
-      <Strike />
+      <Strike strikeType={strikeType}/>
     </div>
   );
 }
