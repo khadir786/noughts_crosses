@@ -61,7 +61,8 @@ function checkWinner(tiles, setStrikeType, count, onOpenModal, setModal) {
 
 function NoughtsCrosses() {
   const [tiles, setTiles] = useState(Array(9).fill(null));
-  const [currentPlayer, setCurrentPlayer] = useState(PLAYER_X);
+  const [initialPlayer, setInitialPlayer] = useState(PLAYER_X)
+  const [currentPlayer, setCurrentPlayer] = useState(initialPlayer);
   const [strikeType, setStrikeType] = useState();
   const [count, setCount] = useState(0);
   const [open, setOpen] = useState(false); // for modal
@@ -92,6 +93,20 @@ function NoughtsCrosses() {
     console.log(index);
   }
 
+  function handleReset() {
+    if (initialPlayer === PLAYER_X) {
+      setCurrentPlayer(PLAYER_O);
+      setInitialPlayer(PLAYER_O);
+    } else {
+      setCurrentPlayer(PLAYER_X);
+      setInitialPlayer(PLAYER_X);
+    }
+    setCount(0);
+    setTiles(Array(9).fill(null));
+    setStrikeType(null);
+    setOpen(false);
+  }
+
   return (
     <div className="app">
       <div className="title">
@@ -107,12 +122,13 @@ function NoughtsCrosses() {
           currentPlayer={currentPlayer}
           strikeType={strikeType}
         />
-        <div className="resetButton ">{count > 0 && <button>Reset Game</button>}</div>
+        <div onClick={handleReset} className="resetButton ">{count > 0 && <button>Reset Game</button>}</div>
         <GameOver
           onOpenModal={onOpenModal}
           onCloseModal={onCloseModal}
           open={open}
           modalInfo={modalInfo}
+          handleReset={handleReset}
         />
       </div>
     </div>

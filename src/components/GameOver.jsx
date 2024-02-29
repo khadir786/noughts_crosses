@@ -6,7 +6,7 @@ import dk from "../assets/dk.gif";
 import mrio from "../assets/mrio.gif";
 import sf from "../assets/sf.gif";
 
-function GameOver({ onOpenModal, onCloseModal, open, modalInfo }) {
+function GameOver({ onOpenModal, onCloseModal, open, modalInfo, handleReset }) {
   const modalImage = modalInfo.type === 'winner' ? dk : mrio;
 
   return (
@@ -29,7 +29,7 @@ function GameOver({ onOpenModal, onCloseModal, open, modalInfo }) {
             <p>{modalInfo.message}</p>
           </div>
           <div className="modal-buttons">
-            <button>Play Again?</button>
+            <button onClick={handleReset}>Play Again?</button>
           </div>
         </div>
       </Modal>
