@@ -57,7 +57,7 @@ export default function Board({ tiles, onTileClick, currentPlayer, strikeType })
         value={tiles[8]}
         currentPlayer={currentPlayer}
       />
-      <Strike strikeType={strikeType}/>
+      <Strike strikeType={strikeType} currentPlayer={currentPlayer}/>
     </div>
   );
 }

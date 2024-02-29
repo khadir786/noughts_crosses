@@ -1,13 +1,18 @@
 export default function Tile({ className, value, onClick, currentPlayer }) {
   let hoverClass = null;
-  if (value == null && currentPlayer != null){
+  let textClass = null;
+  
+  if (value === null) {
+    hoverClass = 'hover';
     hoverClass =  `${currentPlayer.toLowerCase()}-hover`; 
+  } else {
+    textClass = `player-${value}`;
   }
-    
-    return (
+  
+  return (
     <div
       onClick={onClick}
-      className={`tile ${className}  ${hoverClass}`}>
+      className={`tile ${className} ${hoverClass} ${textClass}`}>
       {value}
     </div>
   );

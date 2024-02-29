@@ -69,7 +69,7 @@ function NoughtsCrosses() {
   return (
     <div className="app">
       <div className="title">
-        <h1>Noughts & Crosses</h1>
+        <h1>n<span style={{color: 'darkorange'}}>O</span>ughts & cr<span style={{color: 'lightskyblue'}}>X</span>sses</h1>
       </div>
       <div className="GameContainer">
         <Board
