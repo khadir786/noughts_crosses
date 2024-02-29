@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Board from "./Board";
+import GameOver from "./GameOver";
 
 const PLAYER_X = "X";
 const PLAYER_O = "O";
@@ -49,6 +50,10 @@ function NoughtsCrosses() {
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_X);
   const [strikeType, setStrikeType] = useState();
   const [count, setCount] = useState(0);
+  const [open, setOpen] = useState(false);
+
+  const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => setOpen(false);
 
   console.log("tiles clicked: " + count);
 
@@ -78,6 +83,7 @@ function NoughtsCrosses() {
           currentPlayer={currentPlayer}
           strikeType={strikeType}
         />
+        <GameOver onOpenModal={onOpenModal} onCloseModal={onCloseModal} open={open}/>
       </div>
     </div>
   );
