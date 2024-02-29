@@ -40,7 +40,7 @@ function checkWinner(tiles, setStrikeType, count, onOpenModal, setModal) {
     }
   }
 
-  // Check for draw
+  // check for draw
   if (count >= 9) {
     setModal(prevModal => ({...prevModal, type: 'draw', title: "The game has ended in a draw...", message: 'cool'}));
     console.log("The game has ended in a draw...");

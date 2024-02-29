@@ -2,25 +2,36 @@ import { useState } from "react";
 import "react-responsive-modal/styles.css";
 import "../css/custom_modals.css";
 import { Modal } from "react-responsive-modal";
+import dk from "../assets/dk.gif";
+import mrio from "../assets/mrio.gif";
+import sf from "../assets/sf.gif";
 
-function GameOver({ onOpenModal, onCloseModal, open }) {
+function GameOver({ onOpenModal, onCloseModal, open, modalInfo }) {
+  const modalImage = modalInfo.type === 'winner' ? dk : mrio;
+
   return (
     <div>
-      <button onClick={onOpenModal}>Open modal</button>
       <Modal
         open={open}
         onClose={onCloseModal}
         center
+        showCloseIcon={false}
         classNames={{
-          modal: "NC-GameOverModal",
+          modal: "GameOverModal",
         }}
       >
-        <h2>Simple centered modal</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-          pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet
-          hendrerit risus, sed porttitor quam.
-        </p>
+        <div className="modal-title">
+          <h2>{modalInfo.title}</h2>
+        </div>
+        <div className="modal-content-container">
+          <div className="modal-message">
+            <img src={modalImage} alt="monkey dance" />
+            <p>{modalInfo.message}</p>
+          </div>
+          <div className="modal-buttons">
+            <button>Play Again?</button>
+          </div>
+        </div>
       </Modal>
     </div>
   );
