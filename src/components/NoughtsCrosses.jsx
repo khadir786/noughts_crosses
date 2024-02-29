@@ -6,7 +6,6 @@ const PLAYER_X = "X";
 const PLAYER_O = "O";
 
 const winningCombinations = [
-
   { combo: [0, 1, 2], strikeClass: "strike-row-1" },
   { combo: [3, 4, 5], strikeClass: "strike-row-2" },
   { combo: [6, 7, 8], strikeClass: "strike-row-3" },
@@ -19,9 +18,8 @@ const winningCombinations = [
   { combo: [2, 4, 6], strikeClass: "strike-diagonal-2" },
 ];
 
-  
-function checkWinner(tiles, setStrikeType, count) {
-  for (const {combo, strikeClass} of winningCombinations) {
+function checkWinner(tiles, setStrikeType, count, onOpenModal, setModal) {
+  for (const { combo, strikeClass } of winningCombinations) {
     const tileValue1 = tiles[combo[0]];
     const tileValue2 = tiles[combo[1]];
     const tileValue3 = tiles[combo[2]];
@@ -34,30 +32,40 @@ function checkWinner(tiles, setStrikeType, count) {
       tileValue1 === tileValue2 &&
       tileValue1 === tileValue3
     ) {
-      console.log(`Player ${tileValue1} has won!!!!!`);
       setStrikeType(strikeClass);
-      return; 
-    }
-    if (count >= 9) {
-        console.log('The game has ended in a draw...')
-        return;
+      setModal(prevModal => ({...prevModal, type: 'winner', title: `Player ${tileValue1} has won!!!!!`, message: 'cool'}));
+      console.log(`Player ${tileValue1} has won!!!!!`);
+      onOpenModal();
+      return;
     }
   }
+
+  // Check for draw
+  if (count >= 9) {
+    setModal(prevModal => ({...prevModal, type: 'draw', title: "The game has ended in a draw...", message: 'cool'}));
+    console.log("The game has ended in a draw...");
+    onOpenModal();
+    return;
+  }
 }
+
 
 function NoughtsCrosses() {
   const [tiles, setTiles] = useState(Array(9).fill(null));
   const [currentPlayer, setCurrentPlayer] = useState(PLAYER_X);
   const [strikeType, setStrikeType] = useState();
   const [count, setCount] = useState(0);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // for modal
+  const [modalInfo, setModalInfo] = useState({type: "", title:"", message:  ""});
 
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
 
   console.log("tiles clicked: " + count);
 
-  useEffect(()=>{checkWinner(tiles, setStrikeType, count)}, [count, tiles]);
+  useEffect(() => {
+    checkWinner(tiles, setStrikeType, count, onOpenModal, setModalInfo);
+  }, [count, tiles]);
 
   function handleTileClick(index) {
     if (tiles[index] != null) return; // tile already filled in
@@ -74,7 +82,10 @@ function NoughtsCrosses() {
   return (
     <div className="app">
       <div className="title">
-        <h1>n<span style={{color: 'darkorange'}}>O</span>ughts & cr<span style={{color: 'lightskyblue'}}>X</span>sses</h1>
+        <h1>
+          n<span style={{ color: "darkorange" }}>O</span>ughts & cr
+          <span style={{ color: "lightskyblue" }}>X</span>sses
+        </h1>
       </div>
       <div className="GameContainer">
         <Board
@@ -83,7 +94,12 @@ function NoughtsCrosses() {
           currentPlayer={currentPlayer}
           strikeType={strikeType}
         />
-        <GameOver onOpenModal={onOpenModal} onCloseModal={onCloseModal} open={open}/>
+        <GameOver
+          onOpenModal={onOpenModal}
+          onCloseModal={onCloseModal}
+          open={open}
+          modalInfo={modalInfo}
+        />
       </div>
     </div>
   );
