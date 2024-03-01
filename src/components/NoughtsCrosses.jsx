@@ -59,7 +59,7 @@ function checkWinner(
       setModal((prevModal) => ({
         ...prevModal,
         type: "winner",
-        title: `Player ${tileValue1} has won!!!!!`,
+        title: `Player ${tileValue1} has won!`,
         message: "cool",
       }));
       console.log(`Player ${tileValue1} has won!!!!!`);
