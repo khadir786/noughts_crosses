@@ -18,7 +18,14 @@ const winningCombinations = [
   { combo: [2, 4, 6], strikeClass: "strike-diagonal-2" },
 ];
 
-function checkWinner(tiles, setStrikeType, count, onOpenModal, setModal) {
+function checkWinner(
+  tiles,
+  setStrikeType,
+  count,
+  onOpenModal,
+  setModal,
+  setWinner
+) {
   for (const { combo, strikeClass } of winningCombinations) {
     const tileValue1 = tiles[combo[0]];
     const tileValue2 = tiles[combo[1]];
@@ -32,6 +39,7 @@ function checkWinner(tiles, setStrikeType, count, onOpenModal, setModal) {
       tileValue1 === tileValue2 &&
       tileValue1 === tileValue3
     ) {
+      setWinner(true);
       setStrikeType(strikeClass);
       setModal((prevModal) => ({
         ...prevModal,
@@ -55,14 +63,16 @@ function checkWinner(tiles, setStrikeType, count, onOpenModal, setModal) {
     }));
     console.log("The game has ended in a draw...");
     onOpenModal();
+    setWinner(true);
     return;
   }
 }
 
 function NoughtsCrosses() {
   const [tiles, setTiles] = useState(Array(9).fill(null));
-  const [initialPlayer, setInitialPlayer] = useState(PLAYER_X)
+  const [initialPlayer, setInitialPlayer] = useState(PLAYER_X);
   const [currentPlayer, setCurrentPlayer] = useState(initialPlayer);
+  const [winner, setWinner] = useState(false);
   const [strikeType, setStrikeType] = useState();
   const [count, setCount] = useState(0);
   const [open, setOpen] = useState(false); // for modal
@@ -78,7 +88,14 @@ function NoughtsCrosses() {
   console.log("tiles clicked: " + count);
 
   useEffect(() => {
-    checkWinner(tiles, setStrikeType, count, onOpenModal, setModalInfo);
+    checkWinner(
+      tiles,
+      setStrikeType,
+      count,
+      onOpenModal,
+      setModalInfo,
+      setWinner
+    );
   }, [count, tiles]);
 
   function handleTileClick(index) {
@@ -102,6 +119,7 @@ function NoughtsCrosses() {
       setInitialPlayer(PLAYER_X);
     }
     setCount(0);
+    setWinner(false);
     setTiles(Array(9).fill(null));
     setStrikeType(null);
     setOpen(false);
@@ -122,7 +140,11 @@ function NoughtsCrosses() {
           currentPlayer={currentPlayer}
           strikeType={strikeType}
         />
-        <div onClick={handleReset} className="resetButton ">{count > 0 && <button>Reset Game</button>}</div>
+        <div onClick={handleReset} className="resetButton ">
+          {count > 0 && (
+            <button>{winner ? "Play Again?" : "Reset Game"}</button>
+          )}
+        </div>
         <GameOver
           onOpenModal={onOpenModal}
           onCloseModal={onCloseModal}
