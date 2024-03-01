@@ -108,7 +108,7 @@ function NoughtsCrosses() {
   }, [count, tiles]);
 
   function handleTileClick(index) {
-    if (tiles[index] != null) return; // tile already filled in
+    if (winner || tiles[index] != null) return; // tile already filled in
     const newTiles = [...tiles];
     newTiles[index] = currentPlayer;
     setCount((c) => c + 1);
