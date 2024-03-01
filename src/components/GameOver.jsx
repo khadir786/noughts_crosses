@@ -44,7 +44,7 @@ function GameOver({
               <img id="modal-image" src={modalImage} alt="monkey dance" />
             </div>
           </div>
-          <div>
+          <div className="stats-Container">
             <h1>Stats</h1>
             <h2>O wins: {stats.oWins}</h2>
             <h2>X wins: {stats.xWins}</h2>
