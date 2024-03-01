@@ -46,9 +46,9 @@ function GameOver({
           </div>
           <div>
             <h1>Stats</h1>
-            <p>O wins: {stats.oWins}</p>
-            <p>X wins: {stats.xWins}</p>
-            <p>Draws: {stats.draws}</p>
+            <h2>O wins: {stats.oWins}</h2>
+            <h2>X wins: {stats.xWins}</h2>
+            <h2>Draws: {stats.draws}</h2>
           </div>
         </Carousel>
 
