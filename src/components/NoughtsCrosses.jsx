@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 import Board from "./Board";
 import GameOver from "./GameOver";
+import tik from "../assets/sounds/tik.wav"
+import win from "../assets/sounds/win.wav"
+import draw from "../assets/sounds/draw.mp3"
+
+const clickTikSound = new Audio(tik);
+const winSound = new Audio(win);
+const drawSound = new Audio(draw);
 
 const PLAYER_X = "X";
 const PLAYER_O = "O";
@@ -27,6 +34,7 @@ function checkWinner(
   setWinner,
   setStats
 ) {
+  clickTikSound.play();
   for (const { combo, strikeClass } of winningCombinations) {
     const tileValue1 = tiles[combo[0]];
     const tileValue2 = tiles[combo[1]];
@@ -45,6 +53,7 @@ function checkWinner(
       } else if(tileValue1 === PLAYER_O){
         setStats((prevStats => ({...prevStats, oWins: prevStats.oWins + 1})));
       }
+      winSound.play();
       setWinner(true);
       setStrikeType(strikeClass);
       setModal((prevModal) => ({
@@ -71,6 +80,7 @@ function checkWinner(
     setStats((prevStats => ({...prevStats, draws: prevStats.draws + 1})));
     onOpenModal();
     setWinner(true);
+    drawSound.play();
     return;
   }
 }
