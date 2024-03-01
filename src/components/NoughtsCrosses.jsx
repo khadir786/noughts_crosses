@@ -24,7 +24,8 @@ function checkWinner(
   count,
   onOpenModal,
   setModal,
-  setWinner
+  setWinner,
+  setStats
 ) {
   for (const { combo, strikeClass } of winningCombinations) {
     const tileValue1 = tiles[combo[0]];
@@ -39,6 +40,11 @@ function checkWinner(
       tileValue1 === tileValue2 &&
       tileValue1 === tileValue3
     ) {
+      if (tileValue1 ===  PLAYER_X) { 
+        setStats((prevStats => ({...prevStats, xWins: prevStats.xWins + 1})));
+      } else if(tileValue1 === PLAYER_O){
+        setStats((prevStats => ({...prevStats, oWins: prevStats.oWins + 1})));
+      }
       setWinner(true);
       setStrikeType(strikeClass);
       setModal((prevModal) => ({
@@ -62,6 +68,7 @@ function checkWinner(
       message: "cool",
     }));
     console.log("The game has ended in a draw...");
+    setStats((prevStats => ({...prevStats, draws: prevStats.draws + 1})));
     onOpenModal();
     setWinner(true);
     return;
@@ -81,6 +88,7 @@ function NoughtsCrosses() {
     title: "",
     message: "",
   });
+  const [stats, setStats] = useState({xWins: 0, oWins: 0, draws: 0});
 
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
@@ -94,7 +102,8 @@ function NoughtsCrosses() {
       count,
       onOpenModal,
       setModalInfo,
-      setWinner
+      setWinner,
+      setStats
     );
   }, [count, tiles]);
 
@@ -151,6 +160,7 @@ function NoughtsCrosses() {
           open={open}
           modalInfo={modalInfo}
           handleReset={handleReset}
+          stats={stats}
         />
       </div>
     </div>
