@@ -1,13 +1,15 @@
 import { useState } from "react";
-import "react-responsive-modal/styles.css";
-import "../css/custom_modals.css";
 import { Modal } from "react-responsive-modal";
+import { Carousel } from "react-responsive-carousel";
 import dk from "../assets/dk.gif";
 import mrio from "../assets/mrio.gif";
 import sf from "../assets/sf.gif";
+import "react-responsive-modal/styles.css";
+import "../css/custom_modals.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function GameOver({ onOpenModal, onCloseModal, open, modalInfo, handleReset }) {
-  const modalImage = modalInfo.type === 'winner' ? dk : mrio;
+  const modalImage = modalInfo.type === "winner" ? dk : mrio;
 
   return (
     <div>
@@ -20,17 +22,22 @@ function GameOver({ onOpenModal, onCloseModal, open, modalInfo, handleReset }) {
           modal: "GameOverModal",
         }}
       >
-        <div className="modal-title">
-          <h2>{modalInfo.title}</h2>
-        </div>
-        <div className="modal-content-container">
-          <div className="modal-message">
-            <img src={modalImage} alt="monkey dance" />
-            <p>{modalInfo.message}</p>
+        <Carousel showStatus={false} showThumbs={false}>
+          <div className="modal-winner-draw">
+            <div className="modal-title">
+              <h2>{modalInfo.title}</h2>
+            </div>
+            <div className="modal-message">
+              <img id='modal-image' src={modalImage} alt="monkey dance" />
+            </div>
           </div>
-          <div className="modal-buttons">
-            <button onClick={handleReset}>Play Again?</button>
+          <div>
+            <h1>Stats</h1>
           </div>
+        </Carousel>
+
+        <div className="modal-buttons">
+          <button onClick={handleReset}>Play Again?</button>
         </div>
       </Modal>
     </div>
