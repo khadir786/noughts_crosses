@@ -1,8 +1,10 @@
-# React + Vite
+A Noughts & Crosses game made with React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+![image](https://github.com/khadir786/noughts_crosses/assets/52165828/5ceb9e98-19b5-43ca-b91b-0d138e1c8b7a)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+![image](https://github.com/khadir786/noughts_crosses/assets/52165828/193dea0f-cb88-4757-a429-bf4e4f5a14e7)
+
+
+![image](https://github.com/khadir786/noughts_crosses/assets/52165828/0583a3c4-7eca-4a80-98b1-d2a476ac8008)
