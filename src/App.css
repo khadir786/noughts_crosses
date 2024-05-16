@@ -5,7 +5,12 @@
   text-align: center;
 }
 
+body {
+  background-color: #242424;
+}
+
 .title > h1 {
+  color: white;
   transition: transform 0.3s;
 }
 
